@@ -59,37 +59,22 @@ _generateORBAT = {
                 };
                 _color = phx_orbat_lastUsedColor select 0;
             };
-            // TFR
+            // ACRE
             // Get group's radio frequency
             private _freq = _x getVariable ["phx_radioSettings",nil];
             if (isNil "_freq") then {
                 _freq = "UNK";
             } else {
-                private _chNum = _freq select 0;
-                _chNum = _chNum - 1; //Minus one since array starts at 0
-                private _chArray = _freq select 2;
-                if (_chNum < 0) then {
-                    if (_chNum isEqualTo -1) then {
-                        _freq = 0;
-                    };
-                } else {
-                    _freq = _chArray select _chNum; //Get group's main channel from freq list
-                    if (isNil "_freq") then { //Check if frequency is out of range.
-                        _freq = "UNK";
-                        _str = format["[setGroupIDs] No radio freq found for group - '%1'",groupID _x];
-                        systemChat _str;
-                    };
-                };
-                if (!(_freq isEqualTo "UNK")) then {
-                    _freq = _freq + phx_playerBaseChannel;
-                };
+                private _chNum = _freq select 1;
+                // _chNum = _chNum - 1; //Minus one since array starts at 0
+                _freq = format["CH %1", _chNum];
             };
 
             // Add group to the ORBAT
             if (isNil "_freq") then {
                 _groupString = _groupString + format ["%1 --", _name];
             } else {
-                _groupString = _groupString + format ["<font size='16'>%1</font><font size='14'> - %2 MHz </font><font size='12'>- %3 men</font>:  ", _name, _freq, (count units _x)];
+                _groupString = _groupString + format ["<font size='16'>%1</font><font size='14'> - %2 </font><font size='12'>- %3 men</font>:  ", _name, _freq, (count units _x)];
             };
 
             // Add group members

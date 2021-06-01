@@ -102,6 +102,7 @@ class CfgFunctions {
       class fortifyServer{};
       class server_setupGame{};
       class radio_genFreqs{};
+      class radio_ACREsetup{};
     };
     class end {
       file = "server\end";

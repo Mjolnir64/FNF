@@ -31,5 +31,10 @@ phx_server_disconnectBodies = addMissionEventHandler ["HandleDisconnect", {
   };
 }];
 
+[
+  {([] call acre_api_fnc_isInitialized)},
+  {call phx_fnc_radio_ACREsetup}
+] call CBA_fnc_waitUntilAndExecute;
+
 //Let clients know that server is done setting up
 missionNamespace setVariable ["phx_serverGameSetup",true,true];
