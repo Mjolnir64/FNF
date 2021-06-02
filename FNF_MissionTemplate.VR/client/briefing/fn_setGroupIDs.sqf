@@ -22,6 +22,7 @@ _groups = [
 
     // BLUFOR
     ["Blue_CC","CMD","Company Command",3, [0, 1, 1]],
+    ["Blue_CR","X","X-Ray (Recon)",1, [0.1, 1, 1]],
 
     //1st Platoon
     ["Blue_P1HQ","P1HQ","1st Platoon", 2, [0, 2, 1]],
