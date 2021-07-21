@@ -197,4 +197,45 @@ switch (true) do {
     };
   };
   //END NEUTRAL SECTOR & CONNECTION
+
+  case (phx_gameMode == "scavHunt"): {
+
+    phx_scavHuntCheckScores = {
+      private _scores = createHashMapFromArray [
+        [
+          west,
+          phx_scavHuntObjs select {(_x getVariable ["capturedBy", sideUnknown]) isEqualTo east}
+        ],
+        [
+          east,
+          phx_scavHuntObjs select {(_x getVariable ["capturedBy", sideUnknown]) isEqualTo west}
+        ],
+        [
+          independent,
+          phx_scavHuntObjs select {(_x getVariable ["capturedBy", sideUnknown]) isEqualTo independent}
+        ]
+      ];
+
+      private _winScore = selectMax (values _scores);
+      private _winSide = createHashMap;
+      {
+        if (_y == _winScore) then {_winSide set [_x, _y]};
+      } forEach _scores;
+
+      _winSide;
+    };
+
+    if (count (call _checkScores) > 1) then {
+      "Overtime enabled! \n The first side to capture another item will win." remoteExec ["hint"];
+      waitUntil {sleep 2; count (call _checkScores) == 1};
+      phx_gameEnd = true;
+      publicVariable "phx_gameEnd";
+
+      _winData = ((call _checkScores) toArray false) select 0;
+
+      [_winData # 0, format["%1 won Scavenger Hunt in overtime by holding %2 items!", str(_winData # 0), _winData # 1]] spawn phx_fnc_gameEnd;
+    } else {
+      [_winData # 0, format["%1 won by holding %2 items!", str(_winData # 0), _winData # 1]] spawn phx_fnc_gameEnd;
+    };
+  };
 };

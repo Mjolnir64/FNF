@@ -16,6 +16,7 @@ adSector
 ===NEUTRAL===
 connection
 neutralSector
+scavHunt
 */
 
 /************************* DON'T FORGET TO FILL THIS OUT IF YOUR GAME MODE IS NOT NEUTRAL *************************/

@@ -5,6 +5,7 @@
 #define captureTheFlag "captureTheFlag"
 #define adSector "adSector"
 #define neutralSector "neutralSector"
+#define scavHunt "scavHunt"
 
 #define CARLG "rhs_weap_maaws"
 #define RPG32 "launch_RPG32_green_F"
